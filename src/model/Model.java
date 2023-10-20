@@ -11,28 +11,29 @@ public class Model {
 
     public Model() {
         primes = new ArrayList<>();
-        calculatePrimes(1000);
+        calculatePrimes(2,1000);
     }
-    static boolean numIsPrime(int i, int j) {
-        if (j == 1) {
+    static boolean numIsPrime(int current, float stop, int depth) {
+        int divisibleBy = depth == 0 ? 2 : (Integer) primes.get(depth);
+        if(divisibleBy > stop){
             return true;
-        } else if (i % j == 0) {
+        }else if (current % divisibleBy == 0) {
             return false;
         }
-        return numIsPrime(i, --j);
+        return numIsPrime(current, stop, ++depth);
     }
 
-    static void calculatePrimes(int i) {
-        if (i == 1) {
+    static void calculatePrimes(int current, int stop) {
+        if (current > stop) {
             primes.add(count);
             primes.add(sumOfPrimes);
-        } else if (numIsPrime(i, i / 2)) {
-            primes.add(i);
+        } else if (numIsPrime(current, current / 2.0f, 0)) {
+            primes.add(current);
             ++count;
-            sumOfPrimes += i;
-            calculatePrimes(--i);
+            sumOfPrimes += current;
+            calculatePrimes(++current, stop);
         } else {
-            calculatePrimes(--i);
+            calculatePrimes(++current, stop);
         }
     }
     public List<Integer> getPrimes() {
