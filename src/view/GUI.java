@@ -6,8 +6,9 @@ import java.util.List;
 
 public class GUI {
     private final JTextArea textArea;
+    private static GUI instance;
 
-    public GUI() {
+    private GUI() {
         JFrame frame = new JFrame("Prime Numbers up to 1000");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -18,6 +19,12 @@ public class GUI {
         frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
+    }
+    public static GUI getInstance() {
+        if(instance == null) {
+            instance = new GUI();
+        }
+        return instance;
     }
 
     public void updateTextArea(List<Integer> primeNumbers) {

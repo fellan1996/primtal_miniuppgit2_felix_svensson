@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Model model = new Model();
-            GUI view = new GUI();
+            Model model = Model.getInstance();
+            GUI view = GUI.getInstance();
             Controller controller = new Controller(model, view);
         });
     }

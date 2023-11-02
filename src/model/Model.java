@@ -7,11 +7,18 @@ public class Model {
 
     static int count = 0;
     static int sumOfPrimes = 0;
-    private static List primes;
+    private static List<Integer> primes;
+    private static Model instance;
 
-    public Model() {
+    private Model() {
         primes = new ArrayList<>();
         calculatePrimes(2,1000);
+    }
+    public static Model getInstance() {
+        if(instance == null) {
+            instance = new Model();
+        }
+        return instance;
     }
     static boolean numIsPrime(int current, float stop, int depth) {
         int divisibleBy = depth == 0 ? 2 : (Integer) primes.get(depth);
